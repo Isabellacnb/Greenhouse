@@ -1,8 +1,5 @@
-# Ejercicio utilizando Node JS + Express + Mongo & more
+# Greenhouse
 
-* Web App para generar tareas en formato: # tarea | Title | Description | Tarea
-* Se requieren 2 páginas: Una para dar de alta las nuevas tareas, otra para poder editar el contenido de la tarea. 
-* Son necesarias manejar operaciones: GET/POST para poder: Visualizar las tareas, Agregar Tareas, Modificar Tareas, Modificar el Estatus de una tarea a completada, y eliminar tareas.
-* Es necesario crear un modelo para guardar las Tareas con la siguiente estructura: "title", "description" , "status"
-* Dependencias utilizadas:  express, morgan, mongoose
-* Frameworks: Bootstrap-> https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css
+- 👋 Hi, I’m @Isabellacnb the author of the Greenhouse website.
+
+- 🌱 The purpose of Greenhouse is to help it's users mantain record of their home plants and when they water them. This is with the intetion to remind and notify them when to water their plants, as well as getting tips on how to care for their plants, detect signs of problems in their plants on time and extra fun facts on the plant type.
