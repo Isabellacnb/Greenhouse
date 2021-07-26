@@ -1,0 +1,73 @@
+<%- include ("./templates/_header") %>
+<!-- LIST OF PLANTS IN MY GREENHOUSE -->
+
+
+
+<div class="container">
+  <div class="section-title">
+    <h3>MY PLANTS</h3>
+  </div>
+  <a href="/addplant" class="btn card plant-card">
+    <div class="card-body plant-body">
+      <div class="add-plant">
+        <lottie-player
+            src="https://assets3.lottiefiles.com/packages/lf20_9xoybise.json"
+            background="transparent"
+            speed="1"
+            style="width: 50px; height: 50px"
+            autoplay
+          ></lottie-player>
+          <h4 class="card-title">Add plant</h4>
+      </div>
+    </div>
+  </a>
+
+<% for (var i = 0; i < myplants.length; i++) { %>
+  <a href="/plantinfo/<%=myplants[i]._id%>" class="btn card plant-card">
+    <div class="card-body plant-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <h4 class="card-title"><%= myplants[i].name %></h4>
+          <p class="card-species"><%= myplants[i].type %></p>
+        </div>
+        <div class="col-sm-6 text-right plant-icons">
+          <i id="plant-icon" class="fas fa-seedling fa-2x"></i>
+        </div>
+      </div>
+    </div>
+  </a>
+  <% } %>
+</div>
+
+<div class="container">
+  <div class="section-title">
+    <h3>How to be the best gardener!</h3>
+  </div>
+  <div class="tip-container">
+    <div class="card tip-card">
+      <lottie-player class="card-img-top" src="https://assets6.lottiefiles.com/packages/lf20_jCmeIg.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+      <div class="card-body tip-body">
+        <h4><strong>Tip #1 </strong><br>Water water water!</h4>
+        <p>Don't forget to water your plants and register it on the app so that we can remind you.</p>
+      </div>
+    </div>
+    <div class="card tip-card">
+      <lottie-player class="card-img-top" src="https://assets1.lottiefiles.com/packages/lf20_1plcwvk5.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+      <div class="card-body tip-body">
+        <h4><strong>Tip #2 </strong><br>Love em all!</h4>
+        <p>Give so much love and care to your plants so that they can grow happily!</p>
+      </div>
+    </div>
+    <div class="card tip-card">
+      <lottie-player class="card-img-top" src="https://assets8.lottiefiles.com/packages/lf20_ndCfQl/Flower.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+      <div class="card-body tip-body">
+        <h4><strong>Tip #3 </strong><br>Sun em' up</h4>
+        <p>Make sure to keep them correctly positioned towards the sun, so that they can get enough sunlight.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<%- include ("./templates/_footer") %>
