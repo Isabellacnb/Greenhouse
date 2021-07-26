@@ -1,0 +1,86 @@
+<%- include ("./templates/_header") %>
+
+<div class="container">
+    <div class="section-title">
+        <h3><%= planttype.type %></h3>
+        
+    </div>
+    <div class="plantinfo">
+        <img width="250px" height="250px" src="<%= planttype.image %>" class="rounded float-right plant-img"/>
+        <div class="char-section">
+            <div class="characteristic">
+                <label class="char-name">Water</label>
+                <br>
+                <label class="char-value"><%= planttype.water%></label>
+            </div>
+            <div class="characteristic">
+                <label class="char-name">Sun</label>
+                <br>
+                <label class="char-value"><%= planttype.sunlight %></label>
+            </div>
+            <div class="characteristic">
+                <label class="char-name">Type</label>
+                <br>
+                <label class="char-value"><%= planttype.type %></label>
+            </div>
+            <div class="characteristic">
+                <label class="char-name">Humidity</label>
+                <br>
+                <label class="char-value"><%= planttype.humidity %></label>
+            </div>
+            <div class="characteristic">
+                <label class="char-name">Temp</label>
+                <br>
+                <label class="char-value"><%= planttype.temperature %></label>
+            </div>
+            <div class="characteristic">
+                <label class="char-name">Soil</label>
+                <br>
+                <label class="char-value"><%= planttype.soil %></label>
+            </div>
+        </div>
+        <br />
+
+        <div class="tip-plantinfo">
+            <div class="card tip">
+              <div class="card-body tip-body">
+                <h4><strong>Plant Description</strong></h4>
+                <p><%= planttype.description %></p>
+              </div>
+            </div>
+        </div>
+        
+
+        <div class="tip-plantinfo">
+            <div class="card tip">
+                <h4><strong>Tips on Care</strong></h4>
+                <lottie-player class="card-img-top" src="https://assets9.lottiefiles.com/packages/lf20_50JEo9.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  autoplay></lottie-player>
+              <div class="card-body tip-body">
+                <p><%= planttype.tips %></p>
+              </div>
+            </div>
+        </div>
+
+        <div class="tip-plantinfo">
+            <div class="card tip">
+                <h4><strong>Common Problems</strong></h4>
+                <lottie-player class="card-img-top" src="https://assets4.lottiefiles.com/packages/lf20_j2JmsU.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  autoplay></lottie-player>
+              <div class="card-body tip-body">
+                <p><%= planttype.problems %></p>
+              </div>
+            </div>
+        </div>
+
+        <div class="tip-plantinfo">
+            <div class="card tip">
+                <h4><strong>Precautions</strong></h4>
+                <lottie-player class="card-img-top" src="https://assets5.lottiefiles.com/private_files/lf30_jpe6wzcq.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  autoplay></lottie-player>
+              <div class="card-body tip-body">
+                <p><%= planttype.precautions %></p>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ("./templates/_footer") %>

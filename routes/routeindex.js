@@ -24,8 +24,9 @@ app.get("/userprofile", async (req, res) => {
 });
 
 // Ruta para buscar tipos de plantas
-app.get("/search", async (req, res) => {
-  res.render("search");
+app.get("/planttypes", async (req, res) => {
+  var planttypes = await PlantType.find();
+  res.render("planttypes", {planttypes});
 });
 
 // Ruta para admin para agregar un tipo de planta
@@ -43,8 +44,14 @@ app.get("/plantinfo/:id", async (req, res) => {
   var id = req.params.id;
   var myplant = await MyPlant.findById(id);
   var planttype = await PlantType.findOne({type: myplant.type});
-  console.log(planttype);
   res.render("plantinfo", { myplant, planttype });
+});
+
+// Ruta para ver info del tipo de planta
+app.get("/planttype/:id", async (req, res) => {
+  var id = req.params.id;
+  var planttype = await PlantType.findById(id);
+  res.render("planttype", { planttype });
 });
 
 // Ruta que nos permita eliminar plantas de la greenhouse
@@ -77,6 +84,7 @@ app.get("/", async function (req, res) {
 app.get("/api/planttypes", async function (req, res) {
   var planttypes = await PlantType.find();
   return res.json(planttypes);
-})
+});
+
 
 module.exports = app;

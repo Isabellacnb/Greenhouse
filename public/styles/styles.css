@@ -44,7 +44,7 @@ html, body {
 }
 
 i {
-    padding-right: 7px;
+    padding: 0px 7px;
 }
 
 .nav-button {
@@ -103,16 +103,20 @@ i {
 }
 
 .card-species {
-    color: #529585;
-    font-style: italic;
+    color:#00543d;
     font-size: 14px;
-    padding: 0px;
+    padding: 5px 0px 0px 0px;
     margin: 0px;
     text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+   -webkit-box-orient: vertical;
 }
 
 #plant-icon {
-    color: #00543d;
+    color:#529585;
 }
 
 .plant-icons {
@@ -188,7 +192,7 @@ i {
 }
 
 .plant-img {
-    margin: 7% 0px 0px 1%;
+    margin: 5% 0px 0px 1%;
 }
 
 .characteristic {
@@ -230,4 +234,12 @@ i {
     font-size: 20px;
     font-style: italic;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.badge-pill {
+    margin: 1%;
+    padding: 1% 2%;
+    font-size: 10px;
+    font-style: normal;
+
 }
