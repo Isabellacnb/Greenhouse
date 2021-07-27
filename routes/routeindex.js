@@ -4,6 +4,17 @@ const app = express();
 const MyPlant = require("../model/myplant");
 const PlantType = require("../model/planttype");
 
+// Function to format date
+function formatDate(date) {
+  var yyyy = date.getFullYear().toString();
+  var mm = (date.getMonth()+1).toString();
+  var dd  = date.getDate().toString();
+
+  var mmChars = mm.split('');
+  var ddChars = dd.split('');
+  return yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0]);
+
+}
 
 // Ruta para agregar plantas
 app.get("/addplant", async (req, res) => {
@@ -47,6 +58,15 @@ app.get("/plantinfo/:id", async (req, res) => {
   res.render("plantinfo", { myplant, planttype });
 });
 
+// Water your plant
+app.post("/water/:id", async (req, res) => {
+  var id = req.params.id;
+  console.log(id);
+  var today = new Date();
+  await MyPlant.updateOne({ _id: id }, {dateLastWatered: today});
+  res.redirect(`/plantinfo/${id}`);
+});
+
 // Ruta para ver info del tipo de planta
 app.get("/planttype/:id", async (req, res) => {
   var id = req.params.id;
@@ -66,7 +86,9 @@ app.get("/edit/:id", async(req, res) => {
   var id = req.params.id;
   var myplant = await MyPlant.findById(id);
   var planttypes = await PlantType.find();
-  res.render("editplant", {myplant, planttypes});
+  var date = (myplant.dateLastWatered).toISOString().split('T')[0];
+  console.log(date);
+  res.render("editplant", {myplant, planttypes, date});
 });
 
 app.post("/edit/:id", async (req, res) => {
@@ -76,15 +98,17 @@ app.post("/edit/:id", async (req, res) => {
 });
 
 // Regresaria las plantas guardadas para la greenhouse actual
-app.get("/", async function (req, res) {
+app.get("/", async (req, res) => {
   var myplants = await MyPlant.find();
-  res.render("index", { myplants });
+  var planttypes = await PlantType.find();
+  res.render("index", { myplants, planttypes });
 });
 
-app.get("/api/planttypes", async function (req, res) {
+app.get("/api/planttypes", async (req, res) => {
   var planttypes = await PlantType.find();
   return res.json(planttypes);
 });
+
 
 
 module.exports = app;

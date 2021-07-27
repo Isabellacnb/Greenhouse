@@ -1,12 +1,30 @@
 <%- include ("./templates/_header") %>
 
+<!-- Get today's date setting timestamp to zero -->
+<% var today = new Date(); %>
+<% today.setHours(0,0,0,0); %>
+
+<!-- Create new date to store the date when plant needs to be re watered -->
+<% var waterOn = new Date(myplant.dateLastWatered) %>
+<% waterOn.setDate(waterOn.getDate() + planttype.daysToWater); %> <!-- Add number of days to water-->
+<!-- Set date timestamp to zero -->
+<% waterOn.setHours(0,0,0,0); %>
+
+<!-- For better formatting-->
+<%var weekdays=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];%>
+<%var months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];%>
+
 <div class="container">
     <div class="section-title">
         <div class="float-right">
             <a href = "/edit/<%=myplant._id%>" class="btn btn-secondary plant-btn">Edit</a>
             <a href = "/delete/<%=myplant._id%>" class="btn btn-danger plant-btn">Delete</a>
         </div>
-        <h3><%= myplant.name %></h3>
+        <h3><%= myplant.name %> <!-- If today's date is equal or over the date expected to water -->
+          <% if (today >= waterOn) { %>
+            <span class="badge badge-pill badge-info">Needs Water</span>
+            <% } %></h3>
+          
         
     </div>
     <div class="plantinfo">
@@ -53,8 +71,20 @@
             <div class="card tip">
               <div class="card-body tip-body">
                 <h4><strong>You last watered your plant on</strong></h4>
-                <p><%= myplant.dateLastWatered %></p>
-                <a href = "#" class="btn btn-info plant-btn">Water</a>
+                <p class="dateLastWatered"><strong><%= weekdays[myplant.dateLastWatered.getDay()]%> <%= months[myplant.dateLastWatered.getDay()]%> <%= myplant.dateLastWatered.getDate()%>, <%= myplant.dateLastWatered.getFullYear()%></strong></p>
+                
+                <form id="water-form" action="/water/<%=myplant._id%>" method="post">
+                  <input type="submit" class="btn btn-info plant-btn" value="Water"/>
+                </form>
+                <br />
+                <% if (today >= waterOn) { %>
+                  <div class="alert alert-danger">
+                  <% } else { %>
+                <div class="alert alert-info">
+                  <% } %>
+                 Next date: <strong><%= weekdays[waterOn.getDay()]%> <%= months[waterOn.getDay()]%> <%= waterOn.getDate()%>, <%= waterOn.getFullYear()%></strong>
+                 
+                </div>
               </div>
             </div>
         </div>
@@ -72,7 +102,7 @@
         <div class="tip-plantinfo">
             <div class="card tip">
                 <h4><strong>Tips on Care</strong></h4>
-                <lottie-player class="card-img-top" src="https://assets9.lottiefiles.com/packages/lf20_50JEo9.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  autoplay></lottie-player>
+                <lottie-player class="card-img-top" src="https://assets5.lottiefiles.com/private_files/lf30_xjwmnq0o.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
               <div class="card-body tip-body">
                 <p><%= planttype.tips %></p>
               </div>

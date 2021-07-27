@@ -2,7 +2,7 @@ html, body {
     min-height: 100%;
 }
 .background {
-    background-color: #aaea89;
+    background-color:#529585;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -215,7 +215,18 @@ i {
     margin: 0px;
 }
 
+h3 {
+    display: flex;
+    align-items: center;
+}
+
+.dateLastWatered {
+    color:#529585;
+    font-size: 20px;
+}
+
 .tip {
+
     margin-top: 5%;
     padding: 2%;
     align-items: center;
