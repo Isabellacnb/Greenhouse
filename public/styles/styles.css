@@ -1,6 +1,7 @@
 html, body {
     min-height: 100%;
 }
+
 .background {
     background-color:#529585;
     display: flex;
@@ -40,7 +41,7 @@ html, body {
     background-color: #529585;
     border-radius: 10px;
     border: solid 1px black;
-    width: 40%;
+    width: 60%;
 }
 
 i {
@@ -53,6 +54,7 @@ i {
     border-radius: 50px;
     color: white;
     padding: 8px;
+    margin: 2px;
 }
 
 .nav-button:hover {
@@ -142,6 +144,10 @@ i {
     font-family: "Staatliches", cursive;
 }
 
+.bottom-btns {
+    display: none;
+}
+
 .tip-card {
     margin: 2%;
     width: 33%;
@@ -226,9 +232,8 @@ h3 {
 }
 
 .tip {
-
     margin-top: 5%;
-    padding: 2%;
+    padding: 5%;
     align-items: center;
     border-radius: 10px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -242,7 +247,8 @@ h3 {
 }
 
 .badge {
-    font-size: 20px;
+    font-size: 18px;
+    margin: 2%;
     font-style: italic;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -250,7 +256,119 @@ h3 {
 .badge-pill {
     margin: 1%;
     padding: 1% 2%;
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
+}
 
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    .btntext {
+        font-size: 0px;
+    }
+    .white-div {
+        width: 100%;
+    }
+    .nav-button {
+        margin: 2px;
+    }
+    .navbar {
+        width: 95%;
+        margin: 10px;
+    }
+    .section-title {
+        width: 90%;
+    }
+    .badge-pill {
+        margin: 2%;
+        font-size: 10px;
+    }
+    .plant-card {
+        width: 90%;
+    }
+    .card-title {
+        font-size: 16px;
+    }
+    /*plant icons missing*/
+
+    .tip-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .tip-card {
+        margin: 2%;
+        width: 90%;
+    }
+
+    .top-btns {
+        display: none;
+    }
+
+    .bottom-btns {
+        margin: 30px;
+        display:block;
+    }
+    .plantinfo {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .char-section {
+        width: 90%;
+        align-items:stretch;
+        justify-content: space-between;
+    }
+    .plant-img {
+        display: none;
+    }
+    .characteristic {
+        width: 40%;
+    }
+    h4 {
+        font-size: 18px;
+    }
+    .dateLastWatered {
+        font-size: 16px;
+    }
+    .alert {
+        font-size: 12px;
+        padding: 8px;
+    }
+    .char-name {
+        font-size: 16px;
+    }
+    .char-value {
+        font-size: 14px;
+    }
+    .tip-body {
+        font-size: 14px;
+    }
+    .input-card {
+        width: 95%;
+    }
+    
+}
+
+/* Media Query for low resolution Tables, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    .btntext {
+        font-size: 0;
+    }
+    .white-div {
+        width: 90%;
+    }
+    .navbar {
+        width: 80%;
+    }
+}
+
+/* Media Query for Tables Ipads potrait mode */
+@media (min-width: 768px) and (max-width: 1024px) {
+    
+}
+
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) {
+    
 }

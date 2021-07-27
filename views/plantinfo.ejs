@@ -16,7 +16,7 @@
 
 <div class="container">
     <div class="section-title">
-        <div class="float-right">
+        <div class="float-right top-btns">
             <a href = "/edit/<%=myplant._id%>" class="btn btn-secondary plant-btn">Edit</a>
             <a href = "/delete/<%=myplant._id%>" class="btn btn-danger plant-btn">Delete</a>
         </div>
@@ -129,6 +129,10 @@
             </div>
         </div>
     </div>
+    <div class="bottom-btns">
+      <a href = "/edit/<%=myplant._id%>" class="btn btn-secondary plant-btn">Edit</a>
+      <a href = "/delete/<%=myplant._id%>" class="btn btn-danger plant-btn">Delete</a>
+  </div>
 </div>
 
 <%- include ("./templates/_footer") %>
