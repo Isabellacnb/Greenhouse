@@ -1,3 +1,4 @@
+
 html, body {
     min-height: 100%;
 }
@@ -41,7 +42,7 @@ html, body {
     background-color: #529585;
     border-radius: 10px;
     border: solid 1px black;
-    width: 60%;
+    width: 70%;
 }
 
 i {
@@ -97,6 +98,7 @@ i {
 
 .card-title {
     display: flex;
+    text-align: left;
     align-items: center;
     font-weight: bold;
     color: black;
@@ -287,9 +289,19 @@ h3 {
         width: 90%;
     }
     .card-title {
-        font-size: 16px;
+        font-size: 13px;
+        margin: 0px;
     }
-    /*plant icons missing*/
+    .badges-types {
+        display: none;
+    }
+    .card-species {
+        font-size: 10px;
+    }
+    .row {
+        display: flex;
+        flex-wrap: nowrap;
+    }
 
     .tip-container {
         display: flex;
@@ -317,10 +329,13 @@ h3 {
     .char-section {
         width: 90%;
         align-items:stretch;
-        justify-content: space-between;
+        justify-content: flex-start;
+        margin-left: 12%;
     }
-    .plant-img {
-        display: none;
+    .img {
+        width: 90%;
+        display: flex;
+        justify-content: center;
     }
     .characteristic {
         width: 40%;
@@ -346,14 +361,13 @@ h3 {
     }
     .input-card {
         width: 95%;
-    }
-    
+    } 
 }
 
 /* Media Query for low resolution Tables, Ipads */
-@media (min-width: 481px) and (max-width: 767px) {
+@media (min-width: 481px) and (max-width: 900px) {
     .btntext {
-        font-size: 0;
+        font-size: 0px;
     }
     .white-div {
         width: 90%;
@@ -361,14 +375,92 @@ h3 {
     .navbar {
         width: 80%;
     }
-}
-
-/* Media Query for Tables Ipads potrait mode */
-@media (min-width: 768px) and (max-width: 1024px) {
-    
-}
-
-/* Media Query for Laptops and Desktops */
-@media (min-width: 1025px) {
-    
+    .nav-button {
+        margin: 2px;
+    }
+    .navbar {
+        width: 95%;
+        margin: 10px;
+    }
+    .section-title {
+        width: 90%;
+    }
+    .badge-pill {
+        margin: 2%;
+        font-size: 10px;
+    }
+    .plant-card {
+        width: 90%;
+    }
+    .card-title {
+        font-size: 16px;
+        margin: 0px;
+    }
+    .badges-types {
+        display: none;
+    }
+    .card-species {
+        font-size: 12px;
+    }
+    .row {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    .tip-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .tip-card {
+        margin: 2%;
+        width: 90%;
+    }
+    .top-btns {
+        display: none;
+    }
+    .bottom-btns {
+        margin: 30px;
+        display:block;
+    }
+    .plantinfo {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .char-section {
+        width: 90%;
+        align-items:stretch;
+        justify-content: flex-start;
+        margin-left: 12%;
+    }
+    .img {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+    }
+    .characteristic {
+        width: 40%;
+    }
+    h4 {
+        font-size: 20px;
+    }
+    .dateLastWatered {
+        font-size: 18px;
+    }
+    .alert {
+        font-size: 16px;
+        padding: 8px;
+    }
+    .char-name {
+        font-size: 18px;
+    }
+    .char-value {
+        font-size: 16px;
+    }
+    .tip-body {
+        font-size: 16px;
+    }
+    .input-card {
+        width: 95%;
+    } 
 }
