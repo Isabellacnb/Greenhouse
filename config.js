@@ -5,7 +5,7 @@ const config = {
     }, 
 
     db: {
-        connectionUrl: process.env.MONGO_URL || 'mongodb://localhost/greenhouse'
+        connectionUrl: process.env.MONGODB_HOST || 'mongodb://localhost/greenhouse'
     }
 }
 

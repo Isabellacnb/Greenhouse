@@ -28,7 +28,7 @@ app.post('/login', async (req, res) => {
     var valid = await user.validatePassword(password);
     // if valid --> create token
     if (valid) {
-      var token = jwt.sign({id: user.email, permission: true}, "abcd1234", {expiresIn: "1h"});
+      var token = jwt.sign({id: user.email, permission: true}, process.env.SECRET, {expiresIn: "1h"});
       res.cookie("token", token, {httpOnly: true});
       res.redirect("/");
     } else {
