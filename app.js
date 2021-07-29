@@ -4,6 +4,9 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const config = require("./config");
 const path = require('path')
+var cookieParser = require("cookie-parser")
+var session = require('express-session');
+var flash = require("connect-flash");
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -19,7 +22,6 @@ mongoose.connect(config.db.connectionUrl,{
 // importing routes
 const indexRoutes = require('./routes/routeindex');
 
-
 // settings
 app.set('port', config.app.port);
 app.set('views','views');
@@ -28,7 +30,13 @@ app.set('view engine', 'ejs');
 // middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));
-
+app.use(cookieParser());
+app.use(session({
+    secret: 'myscret',
+    resave: false,
+    saveUninitialized:false
+}));
+app.use(flash());
 
 // routes
 app.use('/', indexRoutes);

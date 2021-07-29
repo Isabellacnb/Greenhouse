@@ -75,7 +75,7 @@
                 <h4><strong>You last watered your plant on</strong></h4>
                 <p class="dateLastWatered"><strong><%= weekdays[myplant.dateLastWatered.getDay()]%> <%= months[myplant.dateLastWatered.getDay()]%> <%= myplant.dateLastWatered.getDate()%>, <%= myplant.dateLastWatered.getFullYear()%></strong></p>
                 
-                <form id="water-form" action="/water/<%=myplant._id%>" method="post">
+                <form id="water-form" action="/water/<%=myplant._id%>" method="POST">
                   <input type="submit" class="btn btn-info plant-btn" value="Water"/>
                 </form>
                 <br />

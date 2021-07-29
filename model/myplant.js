@@ -5,6 +5,7 @@ var MyPlantSchema = Schema({
     name: String,
     location: String,
     type: String,
+    user_id: String,
     dateLastWatered: Date,
 });
 

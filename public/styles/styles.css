@@ -1,10 +1,17 @@
-
 html, body {
-    min-height: 100%;
+    background-color:#529585;
+}
+
+.container-user {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3%;
+    padding: 3%;    
 }
 
 .background {
-    background-color:#529585;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,6 +153,34 @@ i {
     font-family: "Staatliches", cursive;
 }
 
+.alert-login {
+    width: 80%;
+}
+
+.otherAction {
+    margin: 2%;
+    color: #00543d;
+}
+
+a {
+    color: inherit;
+    font-weight: bold;
+}
+
+a:hover {
+    color: inherit;
+}
+
+
+
+.user-title {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    font-family: "Staatliches", cursive;
+    color: black;
+}
+
 .bottom-btns {
     display: none;
 }
@@ -161,12 +196,12 @@ i {
 }
 
 .input-card {
-    width: 50%;
+    width: 70%;
     align-items: center;
     border-radius: 10px;
     box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.19);
     border-collapse: collapse;
-    margin: 3% 3%;
+    margin: 1% 3%;
 }
 
 .body-input-card {
@@ -262,9 +297,11 @@ h3 {
     font-style: normal;
 }
 
-
 /* Media Query for Mobile Devices */
 @media (max-width: 480px) {
+    .container-user{
+        all: unset;
+    }
     .btntext {
         font-size: 0px;
     }
@@ -278,15 +315,12 @@ h3 {
         width: 95%;
         margin: 10px;
     }
-    .section-title {
+    .section-title, .user-title, .plant-card {
         width: 90%;
     }
     .badge-pill {
         margin: 2%;
         font-size: 10px;
-    }
-    .plant-card {
-        width: 90%;
     }
     .card-title {
         font-size: 13px;
@@ -302,7 +336,6 @@ h3 {
         display: flex;
         flex-wrap: nowrap;
     }
-
     .tip-container {
         display: flex;
         flex-direction: column;
@@ -312,11 +345,9 @@ h3 {
         margin: 2%;
         width: 90%;
     }
-
     .top-btns {
         display: none;
     }
-
     .bottom-btns {
         margin: 30px;
         display:block;
@@ -364,8 +395,12 @@ h3 {
     } 
 }
 
+
 /* Media Query for low resolution Tables, Ipads */
 @media (min-width: 481px) and (max-width: 900px) {
+    .container-user{
+        all: unset;
+    }
     .btntext {
         font-size: 0px;
     }
@@ -382,15 +417,12 @@ h3 {
         width: 95%;
         margin: 10px;
     }
-    .section-title {
+    .section-title, .user-title, .plant-card {
         width: 90%;
     }
     .badge-pill {
         margin: 2%;
         font-size: 10px;
-    }
-    .plant-card {
-        width: 90%;
     }
     .card-title {
         font-size: 16px;
@@ -463,4 +495,14 @@ h3 {
     .input-card {
         width: 95%;
     } 
+}
+/* Media Query for larger screens */
+@media (min-width: 901) {
+    .container-user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 7%;
+        padding: 7%;
+    }
 }

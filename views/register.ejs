@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Greenhouse</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type='text/css' href="/styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>  
+    <link rel="shortcut icon" type="image/png" href="https://image.flaticon.com/icons/png/512/628/628283.png"/>
+  </head>
+
+  <body>
+    <div class="background">
+      <div class="white-div">
+        <div class="container-user">
+          <div class="header">
+            <h1 class="app-name">GREENHOUSE</h1>
+            <lottie-player
+              src="https://assets10.lottiefiles.com/packages/lf20_9gc1v9li.json"
+              background="transparent"
+              speed="1"
+              style="width: 200px; height: 200px"
+              autoplay
+            ></lottie-player>
+          </div>
+          <br />
+          <div class="container">
+            <div class="user-title">
+              <h3>USER REGISTRATION</h3>
+            </div>
+            <div class="card input-card">
+              <div class="card-body body-input-card">
+                <form action="/addUser" method="POST">
+                  <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input class="form-control" type="text" name="name" placeholder="Enter name"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input class="form-control" type="text" name="email" placeholder="Enter email"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input class="form-control" type="password" name="password" placeholder="Password"/>
+                  </div>
+                  <center>
+                    <button class="btn btn-submit" type="submit">Register</button>
+                  </center>
+                </form>
+              </div>
+            </div>
+            <div class="otherAction">
+              <p>Already registered? <a href="/login">Log in!</a></p>
+            </div>
+          </div>
+        </div>
+<%- include ("./templates/_footer") %>

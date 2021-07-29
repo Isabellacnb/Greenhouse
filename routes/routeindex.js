@@ -1,20 +1,59 @@
 const express = require("express");
+var flash = require("connect-flash");
+var jwt = require("jsonwebtoken");
+
 const app = express();
 
 const MyPlant = require("../model/myplant");
 const PlantType = require("../model/planttype");
+const User = require('../model/user');
+const verify = require("../middleware/verifyAccess");
 
-// Function to format date
-function formatDate(date) {
-  var yyyy = date.getFullYear().toString();
-  var mm = (date.getMonth()+1).toString();
-  var dd  = date.getDate().toString();
+// USUARIOS
+// Ruta para user login
+app.get("/login", (req, res) => {
+  var message = req.flash('message');
+  res.render("login", {message});
+});
 
-  var mmChars = mm.split('');
-  var ddChars = dd.split('');
-  return yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0]);
+// Ruta para hacer el login
+app.post('/login', async (req, res) => {
+  var {email, password} = req.body;
+  var user = await User.findOne({email: email});
 
-}
+  if (!user) {
+    req.flash('message', 'El usuario no existe');
+    res.redirect('/login');
+  } else {
+    var valid = await user.validatePassword(password);
+    // if valid --> create token
+    if (valid) {
+      var token = jwt.sign({id: user.email, permission: true}, "abcd1234", {expiresIn: "1h"});
+      res.cookie("token", token, {httpOnly: true});
+      res.redirect("/");
+    } else {
+      req.flash('message', 'La contraseña es incorrecta');
+      res.redirect('/login');
+    }
+  }
+});
+
+// Ruta para user login
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+app.post('/addUser', async (req,res) => {
+  var user = new User(req.body);
+  user.password = user.encryptPassword(user.password);
+  await user.save()
+  res.redirect("/login")
+});
+
+app.get('/logoff', async (req, res) => {
+  res.clearCookie("token");
+  res.redirect('/');
+});
 
 // Ruta para agregar plantas
 app.get("/addplant", async (req, res) => {
@@ -23,15 +62,19 @@ app.get("/addplant", async (req, res) => {
   res.render("addplant", {myplants, planttypes});
 });
 
-app.post("/addmyplant", async(req, res) => {
+app.post("/addmyplant", verify, async(req, res) => {
   var myplant = new MyPlant(req.body);
+  myplant.user_id = req.userId;
   await myplant.save();
   res.redirect("/");
 });
 
 // Ruta para ver perfil de usuario
-app.get("/userprofile", async (req, res) => {
-  res.render("userprofile");
+app.get("/userprofile", verify, async (req, res) => {
+  var myplants = await MyPlant.find({user_id: req.userId});
+  var user = await User.findOne({email: req.userId})
+  console.log(user);
+  res.render("userprofile", {myplants, user});
 });
 
 // Ruta para buscar tipos de plantas
@@ -61,7 +104,6 @@ app.get("/plantinfo/:id", async (req, res) => {
 // Water your plant
 app.post("/water/:id", async (req, res) => {
   var id = req.params.id;
-  console.log(id);
   var today = new Date();
   await MyPlant.updateOne({ _id: id }, {dateLastWatered: today});
   res.redirect(`/plantinfo/${id}`);
@@ -87,7 +129,6 @@ app.get("/edit/:id", async(req, res) => {
   var myplant = await MyPlant.findById(id);
   var planttypes = await PlantType.find();
   var date = (myplant.dateLastWatered).toISOString().split('T')[0];
-  console.log(date);
   res.render("editplant", {myplant, planttypes, date});
 });
 
@@ -98,8 +139,8 @@ app.post("/edit/:id", async (req, res) => {
 });
 
 // Regresaria las plantas guardadas para la greenhouse actual
-app.get("/", async (req, res) => {
-  var myplants = await MyPlant.find();
+app.get("/", verify, async (req, res) => {
+  var myplants = await MyPlant.find({user_id: req.userId});
   var planttypes = await PlantType.find();
   res.render("index", { myplants, planttypes });
 });
