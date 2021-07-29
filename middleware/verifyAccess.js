@@ -6,7 +6,7 @@ function verifyToken(req,res,next) {
         return res.redirect('/login')
     }
     else {
-        jwt.verify(token, "abcd1234", function(err, datos) {
+        jwt.verify(token, process.env.SECRET, function(err, datos) {
             if (err) {
                 return res.redirect("/login");
             } else {

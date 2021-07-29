@@ -1,6 +1,9 @@
 const express = require("express");
 var flash = require("connect-flash");
 var jwt = require("jsonwebtoken");
+var dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 
@@ -141,7 +144,9 @@ app.post("/edit/:id", async (req, res) => {
 // Regresaria las plantas guardadas para la greenhouse actual
 app.get("/", verify, async (req, res) => {
   var myplants = await MyPlant.find({user_id: req.userId});
+  console.log(myplants);
   var planttypes = await PlantType.find();
+  console.log(planttypes);
   res.render("index", { myplants, planttypes });
 });
 
