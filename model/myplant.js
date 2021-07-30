@@ -1,3 +1,4 @@
+// Plant for each user
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 

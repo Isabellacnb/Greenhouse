@@ -1,25 +1,26 @@
+// Dependancies
 const express = require("express");
 var flash = require("connect-flash");
 var jwt = require("jsonwebtoken");
 var dotenv = require("dotenv");
 
 dotenv.config();
-
 const app = express();
 
+// Constants
 const MyPlant = require("../model/myplant");
 const PlantType = require("../model/planttype");
 const User = require('../model/user');
 const verify = require("../middleware/verifyAccess");
 
 // USUARIOS
-// Ruta para user login
+// Route to render login page
 app.get("/login", (req, res) => {
   var message = req.flash('message');
   res.render("login", {message});
 });
 
-// Ruta para hacer el login
+// Request to validate login
 app.post('/login', async (req, res) => {
   var {email, password} = req.body;
   var user = await User.findOne({email: email});
@@ -41,38 +42,42 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Ruta para user login
+// Route to render register page
 app.get("/register", (req, res) => {
   res.render("register");
 });
 
+// Request to add user to database and send to login page
 app.post('/addUser', async (req,res) => {
   var user = new User(req.body);
-  user.password = user.encryptPassword(user.password);
-  await user.save()
-  res.redirect("/login")
+  user.password = user.encryptPassword(user.password); // Encrypt user password
+  await user.save();
+  res.redirect("/login");
 });
 
+// Route to log off account
 app.get('/logoff', async (req, res) => {
   res.clearCookie("token");
   res.redirect('/');
 });
 
-// Ruta para agregar plantas
+// Route to render add plant page form
 app.get("/addplant", async (req, res) => {
   var myplants = await MyPlant.find();
   var planttypes = await PlantType.find();
   res.render("addplant", {myplants, planttypes});
 });
 
+// Request to add plant to user profile
 app.post("/addmyplant", verify, async(req, res) => {
   var myplant = new MyPlant(req.body);
   myplant.user_id = req.userId;
   await myplant.save();
+  req.flash('msg', 'Plant added succesfully!');
   res.redirect("/");
 });
 
-// Ruta para ver perfil de usuario
+// Route to go to user profile information
 app.get("/userprofile", verify, async (req, res) => {
   var myplants = await MyPlant.find({user_id: req.userId});
   var user = await User.findOne({email: req.userId})
@@ -80,23 +85,24 @@ app.get("/userprofile", verify, async (req, res) => {
   res.render("userprofile", {myplants, user});
 });
 
-// Ruta para buscar tipos de plantas
+// Route to search for the types of plants in the database
 app.get("/planttypes", async (req, res) => {
   var planttypes = await PlantType.find();
   res.render("planttypes", {planttypes});
 });
 
-// Ruta para admin para agregar un tipo de planta
+// Route to go to the form to add new plant type to the database
 app.get("/addplanttype", async(req, res) => {
   res.render("addplanttype");
 });
 
+// Request to add a new plant type to database
 app.post("/addplanttype", async(req, res) => {
   var planttype = new PlantType(req.body);
   await planttype.save();
 });
 
-// Ruta para ver info de mi planta
+// Route to see info on selected plant
 app.get("/plantinfo/:id", async (req, res) => {
   var id = req.params.id;
   var myplant = await MyPlant.findById(id);
@@ -104,7 +110,7 @@ app.get("/plantinfo/:id", async (req, res) => {
   res.render("plantinfo", { myplant, planttype });
 });
 
-// Water your plant
+// Request to water selected plant
 app.post("/water/:id", async (req, res) => {
   var id = req.params.id;
   var today = new Date();
@@ -112,21 +118,21 @@ app.post("/water/:id", async (req, res) => {
   res.redirect(`/plantinfo/${id}`);
 });
 
-// Ruta para ver info del tipo de planta
+// Route to see info on selected plant type
 app.get("/planttype/:id", async (req, res) => {
   var id = req.params.id;
   var planttype = await PlantType.findById(id);
   res.render("planttype", { planttype });
 });
 
-// Ruta que nos permita eliminar plantas de la greenhouse
+// Request to delete selected plant
 app.get("/delete/:id", async (req, res) => {
   var id = req.params.id;
   await MyPlant.remove({ _id: id });
   res.redirect("/");
 });
 
-// Ruta para editar los datos en pagina editplant
+// Route to go to edit form on selected plant
 app.get("/edit/:id", async(req, res) => {
   var id = req.params.id;
   var myplant = await MyPlant.findById(id);
@@ -135,26 +141,25 @@ app.get("/edit/:id", async(req, res) => {
   res.render("editplant", {myplant, planttypes, date});
 });
 
+// Route to update selected plant info
 app.post("/edit/:id", async (req, res) => {
   var id = req.params.id;
   await MyPlant.updateOne({ _id: id }, req.body);
   res.redirect(`/plantinfo/${id}`);
 });
 
-// Regresaria las plantas guardadas para la greenhouse actual
+// Route to home, to see current plants in user's greenhouse
 app.get("/", verify, async (req, res) => {
+  var msg = req.flash('msg');
   var myplants = await MyPlant.find({user_id: req.userId});
-  console.log(myplants);
   var planttypes = await PlantType.find();
-  console.log(planttypes);
-  res.render("index", { myplants, planttypes });
+  res.render("index", { myplants, planttypes, msg });
 });
 
+// Route to see all plant types in the api
 app.get("/api/planttypes", async (req, res) => {
   var planttypes = await PlantType.find();
   return res.json(planttypes);
 });
-
-
 
 module.exports = app;

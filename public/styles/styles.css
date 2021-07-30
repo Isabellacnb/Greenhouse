@@ -175,8 +175,6 @@ a:hover {
     color: inherit;
 }
 
-
-
 .user-title {
     width: 70%;
     display: flex;
@@ -301,6 +299,11 @@ h3 {
     font-style: normal;
 }
 
+.alert-plant {
+    margin-top: 3%;
+    width: 60%;
+}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 480px) {
     .container-user{
@@ -398,7 +401,6 @@ h3 {
         width: 95%;
     } 
 }
-
 
 /* Media Query for low resolution Tables, Ipads */
 @media (min-width: 481px) and (max-width: 900px) {

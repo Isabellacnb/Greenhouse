@@ -56,6 +56,11 @@
     </div>
   </a>
   <% } %>
+  <% if (msg.length > 0) { %>
+    <div class="alert alert-success alert-plant" role="alert">
+      <strong>SUCCESS: </strong><%=msg%>
+    </div>
+    <% } %>
 </div>
 
 <div class="container">
@@ -86,7 +91,6 @@
     </div>
   </div>
 </div>
-
 </div>
 
 <%- include ("./templates/_footer") %>
