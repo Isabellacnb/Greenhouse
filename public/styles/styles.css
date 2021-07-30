@@ -42,6 +42,10 @@ html, body {
     padding: 10px;
 }
 
+svg {
+    margin: 0px 3px;
+}
+
 .navbar {
     margin: 20px;
     display: flex;
@@ -59,7 +63,7 @@ i {
 .nav-button {
     background-color: inherit;
     border: solid white 3px;
-    border-radius: 50px;
+    border-radius: 15px;
     color: white;
     padding: 8px;
     margin: 2px;
@@ -67,7 +71,7 @@ i {
 
 .nav-button:hover {
     background-color: #00543d;
-    border-radius: 50px;
+    border-radius: 15px;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     color: white;
 }
