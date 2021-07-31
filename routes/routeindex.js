@@ -81,12 +81,11 @@ app.post("/addmyplant", verify, async(req, res) => {
 app.get("/userprofile", verify, async (req, res) => {
   var myplants = await MyPlant.find({user_id: req.userId});
   var user = await User.findOne({email: req.userId})
-  console.log(user);
   res.render("userprofile", {myplants, user});
 });
 
 // Route to search for the types of plants in the database
-app.get("/planttypes", async (req, res) => {
+app.get("/planttypes", verify, async (req, res) => {
   var planttypes = await PlantType.find();
   res.render("planttypes", {planttypes});
 });
@@ -103,7 +102,7 @@ app.post("/addplanttype", async(req, res) => {
 });
 
 // Route to see info on selected plant
-app.get("/plantinfo/:id", async (req, res) => {
+app.get("/plantinfo/:id", verify, async (req, res) => {
   var id = req.params.id;
   var myplant = await MyPlant.findById(id);
   var planttype = await PlantType.findOne({type: myplant.type});
@@ -119,21 +118,21 @@ app.post("/water/:id", async (req, res) => {
 });
 
 // Route to see info on selected plant type
-app.get("/planttype/:id", async (req, res) => {
+app.get("/planttype/:id", verify, async (req, res) => {
   var id = req.params.id;
   var planttype = await PlantType.findById(id);
   res.render("planttype", { planttype });
 });
 
 // Request to delete selected plant
-app.get("/delete/:id", async (req, res) => {
+app.get("/delete/:id", verify, async (req, res) => {
   var id = req.params.id;
   await MyPlant.remove({ _id: id });
   res.redirect("/");
 });
 
 // Route to go to edit form on selected plant
-app.get("/edit/:id", async(req, res) => {
+app.get("/edit/:id", verify, async(req, res) => {
   var id = req.params.id;
   var myplant = await MyPlant.findById(id);
   var planttypes = await PlantType.find();
@@ -142,7 +141,7 @@ app.get("/edit/:id", async(req, res) => {
 });
 
 // Route to update selected plant info
-app.post("/edit/:id", async (req, res) => {
+app.post("/edit/:id", verify, async (req, res) => {
   var id = req.params.id;
   await MyPlant.updateOne({ _id: id }, req.body);
   res.redirect(`/plantinfo/${id}`);
@@ -157,7 +156,7 @@ app.get("/", verify, async (req, res) => {
 });
 
 // Route to see all plant types in the api
-app.get("/api/planttypes", async (req, res) => {
+app.get("/api/planttypes", verify, async (req, res) => {
   var planttypes = await PlantType.find();
   return res.json(planttypes);
 });
